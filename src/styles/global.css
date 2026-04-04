@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 基础排版：简历这种长文本需要更舒适的行距 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 双语切换：通过设置 data-lang 控制显示哪种语言 */
+[data-lang="zh"] [data-i18n="en"] {
+  display: none;
+}
+[data-lang="en"] [data-i18n="zh"] {
+  display: none;
+}
+
+/* Apple-like reveal animation（轻量淡入；尊重 reduced-motion） */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@layer components {
+  .section-heading {
+    @apply flex items-center gap-3 text-lg font-bold uppercase tracking-[0.12em] text-neutral-900 dark:text-neutral-50 sm:text-xl;
+  }
+  .section-heading::before {
+    content: "";
+    @apply h-9 w-1 shrink-0 rounded-full bg-gradient-to-b from-teal-600 to-cyan-600 shadow-sm shadow-teal-600/25 dark:from-teal-400 dark:to-cyan-400 dark:shadow-teal-400/20;
+  }
+
+  .nav-link {
+    @apply relative text-neutral-700 transition-colors hover:text-teal-700 dark:text-neutral-200 dark:hover:text-teal-300;
+  }
+  .nav-link:hover {
+    @apply decoration-teal-500 decoration-2 underline-offset-[6px];
+    text-decoration-line: underline;
+  }
+
+  .lang-btn-active {
+    @apply border-teal-600 bg-teal-50 shadow-md shadow-teal-600/15 dark:border-teal-400 dark:bg-teal-950/70 dark:shadow-teal-400/10;
+  }
+}
+

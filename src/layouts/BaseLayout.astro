@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Resume", description = "Personal resume" } =
+  Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen bg-[#f4f9f9] text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
+    <slot />
+  </body>
+</html>
+
